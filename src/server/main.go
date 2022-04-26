@@ -20,7 +20,7 @@ func main() {
 	rootCmd.AddCommand(&cobra.Command{
 		Use: "server",
 		Run: func(cmd *cobra.Command, args []string) {
-			
+
 			logrus.SetOutput(os.Stdout)
 
 			conf := config.Conf

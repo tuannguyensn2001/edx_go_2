@@ -9,9 +9,10 @@ import (
 )
 
 type Config struct {
-	DbUrl string
-	Port  string
-	Db    *gorm.DB
+	DbUrl     string
+	Port      string
+	Db        *gorm.DB
+	SecretKey string
 }
 
 var Conf Config
@@ -38,9 +39,10 @@ func Load() (Config, error) {
 	}
 
 	result := &Config{
-		DbUrl: viper.GetString("DB_URL"),
-		Port:  viper.GetString("PORT"),
-		Db:    db,
+		DbUrl:     viper.GetString("DB_URL"),
+		Port:      viper.GetString("PORT"),
+		Db:        db,
+		SecretKey: viper.GetString("SECRET_KEY_JWT"),
 	}
 
 	Conf = *result

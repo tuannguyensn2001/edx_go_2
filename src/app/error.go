@@ -22,6 +22,7 @@ func NewErrorResponse(message string, statusCode int, data interface{}, err erro
 		Message:    message,
 		StatusCode: statusCode,
 		Data:       data,
+		RootErr:    err,
 	}
 }
 
@@ -41,10 +42,22 @@ func ErrInvalidRequest(err error) *Error {
 	return NewErrorResponse("Invalid Request", http.StatusBadRequest, nil, err)
 }
 
+func ErrInvalidRequestWithMessage(err error, message string) *Error {
+	return NewErrorResponse(message, http.StatusBadRequest, nil, err)
+}
+
 func ErrInternalServer(err error) *Error {
 	return NewErrorResponse("Error Server", http.StatusInternalServerError, nil, err)
 }
 
 func ErrEntityExisted(err error, message string) *Error {
 	return NewErrorResponse(message, http.StatusConflict, nil, err)
+}
+
+func ErrNoPermission(err error) *Error {
+	return NewErrorResponse("Don't have permission", http.StatusForbidden, nil, err)
+}
+
+func ErrEntityNotFound(err error, message string) *Error {
+	return NewErrorResponse(message, http.StatusNotFound, nil, err)
 }

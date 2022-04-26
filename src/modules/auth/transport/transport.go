@@ -18,7 +18,7 @@ func NewTransport() *transport {
 	}
 
 	r := authrepository.NewRepository(t.conf.Db)
-	s := authservice.NewService(r)
+	s := authservice.NewService(r, t.conf.SecretKey)
 
 	t.service = s
 
